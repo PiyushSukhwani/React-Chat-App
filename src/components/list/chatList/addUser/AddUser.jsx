@@ -23,31 +23,42 @@ function AddUser() {
     const chatRef = collection(db, "chats");
     const userChatsRef = collection(db, "userchats");
 
+    const currentUserId = currentUser.id.substring(0, 15);
+    const userId = user.id.substring(0, 15);
+    const combinedId =
+      currentUserId > userId ? currentUserId + userId : userId + currentUserId;
+
     try {
-      const newChatRef = doc(chatRef);
+      const res = await getDoc(doc(chatRef, combinedId));
 
-      await setDoc(newChatRef, {
-        createdAt: serverTimestamp(),
-        messages: [],
-      });
+      if (res.exists()) {
+        return;
+      } else {
+        // const newChatRef = doc(chatRef, combinedId);
 
-      await updateDoc(doc(userChatsRef, user.id), {
-        chats: arrayUnion({
-          chatId: newChatRef.id,
-          lastMessage: "",
-          receiverId: currentUser.id,
-          updatedAt: Date.now(),
-        }),
-      });
+        await setDoc(doc(chatRef, combinedId), {
+          createdAt: serverTimestamp(),
+          messages: [],
+        });
 
-      await updateDoc(doc(userChatsRef, currentUser.id), {
-        chats: arrayUnion({
-          chatId: newChatRef.id,
-          lastMessage: "",
-          receiverId: user.id,
-          updatedAt: Date.now(),
-        }),
-      });
+        await updateDoc(doc(userChatsRef, user.id), {
+          chats: arrayUnion({
+            chatId: combinedId,
+            lastMessage: "",
+            receiverId: currentUser.id,
+            updatedAt: Date.now(),
+          }),
+        });
+
+        await updateDoc(doc(userChatsRef, currentUser.id), {
+          chats: arrayUnion({
+            chatId: combinedId,
+            lastMessage: "",
+            receiverId: user.id,
+            updatedAt: Date.now(),
+          }),
+        });
+      }
     } catch (error) {
       console.log(error);
     }
