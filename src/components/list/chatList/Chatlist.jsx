@@ -85,7 +85,8 @@ function Chatlist() {
           />
         </div>
         <img
-          src={addMode ? "./minus.png" : "./plus.png"}
+          // src={addMode ? "./minus.png" : "./plus.png"} 
+          src="add_user.webp"
           alt=""
           className="add"
           onClick={() => setAddMode((prev) => !prev)}
@@ -118,7 +119,7 @@ function Chatlist() {
         </div>
       ))}
 
-      {addMode && <AddUser />}
+      {addMode && <AddUser setAddMode={setAddMode}/>}
     </div>
   );
 }

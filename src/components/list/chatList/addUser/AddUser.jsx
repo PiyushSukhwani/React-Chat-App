@@ -15,11 +15,13 @@ import {
 import { db } from "../../../../lib/firebase";
 import { useSelector } from "react-redux";
 
-function AddUser() {
+function AddUser({setAddMode}) {
   const [user, setUser] = useState(null);
+  const [userName, setUserName] = useState("");
   const currentUser = useSelector((state) => state.userAuth.currentUser);
 
   const handleAdd = async (e) => {
+    if (currentUser.username === userName) return;
     const chatRef = collection(db, "chats");
     const userChatsRef = collection(db, "userchats");
 
@@ -68,11 +70,12 @@ function AddUser() {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const username = formData.get("username");
+    const queryUserName = formData.get("username");
+    setUserName(queryUserName);
 
     try {
       const userRef = collection(db, "users");
-      const q = query(userRef, where("username", "==", username));
+      const q = query(userRef, where("username", "==", queryUserName));
 
       const querySnapshot = await getDocs(q);
 
@@ -86,8 +89,11 @@ function AddUser() {
 
   return (
     <div className="addUser">
+      <div className="cross">
+        <img src="cross3.png" alt="" onClick={() => setAddMode(false)}/>
+      </div>
       <form onSubmit={handleSearch}>
-        <input type="text" placeholder="Username" name="username" />
+        <input type="text" placeholder="Enter username" name="username" />
         <button>Search</button>
       </form>
       {user && (

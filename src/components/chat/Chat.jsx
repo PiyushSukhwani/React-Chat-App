@@ -145,8 +145,15 @@ function Chat() {
             <div className="texts">
               {message.img && <img src={message.img} alt="" />}
               <div className="messageContent">
-              <img src={ message.senderId === currentUser?.id ? currentUser.avatar : user.avatar} alt="" />
-              <p>{message.text}</p>
+                <img
+                  src={
+                    message.senderId === currentUser?.id
+                      ? currentUser.avatar
+                      : user.avatar
+                  }
+                  alt=""
+                />
+                <p>{message.text}</p>
               </div>
               {/* <span>1 min ago</span> */}
             </div>
@@ -165,6 +172,17 @@ function Chat() {
       </div>
 
       <div className="bottom">
+        <div className="emoji">
+          <img
+            src="./emoji.png"
+            alt=""
+            onClick={() => setOpen((prev) => !prev)}
+          />
+          <div className="emojiPicker">
+            <EmojiPicker open={open} onEmojiClick={handleEmoji} />
+          </div>
+        </div>
+        
         <div className="icons">
           <label htmlFor="img">
             <img src="./img.png" alt="" />
@@ -175,27 +193,23 @@ function Chat() {
             style={{ display: "none" }}
             onChange={handleImg}
           />
-          <img src="./camera.png" alt="" />
-          <img src="./mic.png" alt="" />
+          {/* <img src="./camera.png" alt="" /> */}
+          {/* <img src="./mic.png" alt="" /> */}
         </div>
+
         <input
           type="text"
-          placeholder={(isCurrentUserBlocked || isReceiverBlocked) ? "You cannot send a message" : "Type a message..."}
+          placeholder={
+            isCurrentUserBlocked || isReceiverBlocked
+              ? "You cannot send a message"
+              : "Type a message..."
+          }
           value={text}
           onChange={(e) => setText(e.target.value)}
           onKeyDown={handleKeyDown}
           disabled={isCurrentUserBlocked || isReceiverBlocked}
         />
-        <div className="emoji">
-          <img
-            src="./emoji.png"
-            alt=""
-            onClick={() => setOpen((prev) => !prev)}
-          />
-          <div className="emojiPicker">
-            <EmojiPicker open={open} onEmojiClick={handleEmoji} />
-          </div> 
-        </div>
+
         <button
           className="sendButton"
           onClick={handleSend}
