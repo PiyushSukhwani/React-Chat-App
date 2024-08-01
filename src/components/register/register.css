@@ -1,6 +1,6 @@
-.containerr {
-  width: 25rem;
-  height: 27rem;
+.container {
+  width: 29rem;
+  height: 35rem;
   display: flex;
   align-items: center;
   gap: 100px;
@@ -9,7 +9,7 @@
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.125);
 
-  .login {
+  .register {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -28,7 +28,7 @@
         outline: none;
         background-color: rgba(17, 25, 40, 0.6);
         border-radius: 5px;
-      color: white;
+        color: white;
       }
 
       label {
@@ -68,13 +68,18 @@
 }
 
 @media screen and (max-width : 750px) {
-  .containerr {
-    width: 24rem;
+  .container {
+    width: 25rem;
+    height: 31rem;
   }
 }
 
 @media screen and (max-width : 500px) {
-  .containerr {
-    width: 22rem;
+  .container {
+    width: 23rem;
+  }
+
+  .register {
+    /* flex-basis: 100%; */
   }
 }

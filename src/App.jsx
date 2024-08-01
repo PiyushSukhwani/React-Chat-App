@@ -8,6 +8,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./lib/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserInfo } from "./store/useUserStore";
+import Register from "./components/register/Register";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,18 +37,18 @@ function App() {
   if (isLoading) return <div className="loading">Loading...</div>;
 
   return (
-    <div className="container">
+    <div>
       {currentUser ? (
-        <>
+        <div className="chat-container">
           <List />
           {chatId && <Chat />}
           {/* {chatId && <Detail />} */}
-        </>
+        </ div>
       ) : (
         <Login />
       )}
       <Notification />
-    </div>
+      </div>
   );  
 }
 

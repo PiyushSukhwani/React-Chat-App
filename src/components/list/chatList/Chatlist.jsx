@@ -71,7 +71,9 @@ function Chatlist() {
     }
   };
 
-  const filterChat = chats.filter(c => c.user.username.toLowerCase().includes(input.toLowerCase()))
+  const filterChat = chats.filter((c) =>
+    c.user.username.toLowerCase().includes(input.toLowerCase())
+  );
 
   return (
     <div className="chatList">
@@ -85,7 +87,7 @@ function Chatlist() {
           />
         </div>
         <img
-          // src={addMode ? "./minus.png" : "./plus.png"} 
+          // src={addMode ? "./minus.png" : "./plus.png"}
           src="add_user.webp"
           alt=""
           className="add"
@@ -114,12 +116,12 @@ function Chatlist() {
                 ? "User"
                 : chat.user.username}
             </span>
-            <p>{chat.lastMessage}</p>
+            {<p>{chat.lastMessage.length > 35 ? chat.lastMessage.substring(0, 35) + '...' : chat.lastMessage}</p>}
           </div>
         </div>
       ))}
 
-      {addMode && <AddUser setAddMode={setAddMode}/>}
+      {addMode && <AddUser setAddMode={setAddMode} />}
     </div>
   );
 }

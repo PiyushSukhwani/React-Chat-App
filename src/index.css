@@ -15,7 +15,7 @@ body {
   color: white;
 }
 
-.container {
+.chat-container {
   width: 70vw;
   height: 90vh;
   background-color: rgba(17, 25, 40, 0.75);
@@ -33,13 +33,13 @@ body {
 }
 
 @media screen and (max-width : 1260px) {
-  .container {
+  .chat-container {
     width: 80vw;
   }
 }
 
 @media screen and (max-width : 1230px) {
-  .container {
+  .chat-container {
     width: 90vw;
   }
 }
