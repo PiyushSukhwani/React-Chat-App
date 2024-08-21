@@ -12,12 +12,13 @@ const upload = async (file) => {
     uploadTask.on(
       "state_changed",
       (snapshot) => {
+        toast.info(`Uploading...`);
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          toast.info(`Uploading ${progress}% done`)
         console.log("Upload is " + progress + "% done");
       },
       (error) => {
+        toast.info(error);
         reject(error);
       },
       () => {

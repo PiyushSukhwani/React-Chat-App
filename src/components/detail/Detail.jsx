@@ -87,9 +87,6 @@
 //             ? "User Blocked / Click to UnBlock"
 //             : "Block User"}
 //         </button>
-//         <button className="logout" onClick={() => auth.signOut()}>
-//           Logout
-//         </button>
 //       </div>
 //     </div>
 //   );

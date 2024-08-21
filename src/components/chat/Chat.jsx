@@ -21,14 +21,12 @@ function Chat() {
     url: "",
   });
   const endRef = useRef(null);
-  const chatId = useSelector((state) => state.userChat.chatId);
-  const user = useSelector((state) => state.userChat.user);
-  const isCurrentUserBlocked = useSelector(
-    (state) => state.userChat.isCurrentUserBlocked
-  );
-  const isReceiverBlocked = useSelector(
-    (state) => state.userChat.isReceiverBlocked
-  );
+  // const chatId = useSelector((state) => state.userChat.chatId);
+  // const user = useSelector((state) => state.userChat.user);
+  // const isCurrentUserBlocked = useSelector((state) => state.userChat.isCurrentUserBlocked);
+  // const isReceiverBlocked = useSelector((state) => state.userChat.isReceiverBlocked);
+  
+  const { chatId, user, isCurrentUserBlocked, isReceiverBlocked } = useSelector((state) => state.userChat);
   const currentUser = useSelector((state) => state.userAuth.currentUser);
 
   useEffect(() => {
@@ -92,7 +90,7 @@ function Chat() {
 
           userChatsData.chats[chatIndex].lastMessage = text;
           userChatsData.chats[chatIndex].isSeen =
-            id === currentUser.id ? true : false;
+            id === currentUser.id ? true : false;   // the users isSeen turns false whenever the currentUser sends the message, modify this....
           userChatsData.chats[chatIndex].updatedAt = Date.now();
 
           await updateDoc(userChatRef, {
@@ -103,6 +101,7 @@ function Chat() {
     } catch (error) {
       console.log(error);
     }
+    
     setImg({
       file: null,
       url: "",

@@ -64,6 +64,15 @@
         }
       }
     }
+    .register-link {
+      color: #e0e0ee;
+      font-weight: 500;
+      font-size: 17px;
+
+      a{
+        color: rgb(52, 10, 137);
+      }
+    }
   }
 }
 

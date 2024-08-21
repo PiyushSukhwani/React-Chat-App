@@ -25,7 +25,6 @@ function Chatlist() {
           const userDocSnap = await getDoc(userDocRef);
 
           const user = userDocSnap.data();
-
           return { ...item, user };
         });
 
@@ -50,7 +49,7 @@ function Chatlist() {
       (item) => item.chatId === chat.chatId
     );
 
-    userChats[chatIndex].isSeen = true;
+    userChats[chatIndex].isSeen = true; // here, the isSeen will become after tapping again and again, modify this...
 
     const userChatsRef = doc(db, "userchats", currentUser.id);
 
@@ -100,7 +99,6 @@ function Chatlist() {
           className={`item ${chat?.isSeen ? "" : "notSeen"}`}
           key={chat.chatId}
           onClick={() => handleSelect(chat)}
-          // style={{ backgroundColor: chat?.isSeen ? "transparent" : "#5183fe" }}
         >
           <img
             src={
